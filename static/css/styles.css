@@ -1,0 +1,743 @@
+/* Variables */
+:root {
+    --primary-color: #2563eb;
+    --text-primary: #1f2937;
+    --text-secondary: #4b5563;
+    --bg-color: #ffffff;
+    --bg-secondary: #f9fafb;
+    --border-color: #e5e7eb;
+    --success-color: #10B981;
+    --success-color: #10B981;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #60a5fa;
+        /* Lighter blue for dark mode */
+        --text-primary: #f9fafb;
+        --text-secondary: #d1d5db;
+        --bg-color: #0f172a;
+
+    }
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-secondary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-primary);
+    margin-top: 0;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #1d4ed8;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Hero Section */
+.hero {
+    background-color: var(--bg-color);
+    padding: 2.5rem 0 2rem;
+    /* Increased bottom padding to prevent overlap */
+    text-align: center;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Standard property for compatibility */
+    -webkit-text-fill-color: transparent;
+}
+
+.publication-venue {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.authors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.author-block a {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.affiliations {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+}
+
+.publication-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    background-color: #1f2937;
+    color: #fff;
+    border-radius: 9999px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.link-btn:hover {
+    background-color: #374151;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.icon {
+    font-size: 1rem;
+}
+
+/* Paper Sections */
+.paper-section {
+    background: var(--bg-color);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    /* Fade In Animation */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.paper-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+/* Teaser Video/Image */
+.teaser-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    /* border: 1px solid var(--border-color); */
+}
+
+.teaser-video,
+.teaser-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Abstract */
+.abstract-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: justify;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+/* Method Slider */
+.slider-container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    overflow: hidden;
+    /* Slider needs to hide overflow */
+}
+
+.slides-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    /* Padding is inside the width */
+    padding: 0 1rem;
+}
+
+.slide-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.method-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.slider-image-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+    /* border: 1px solid var(--border-color); */
+}
+
+.slider-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.video-teaser {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.slider-image-container {
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    /* kept existing margin from earlier css block? No, inline text said margin: 0 auto */
+    /* Inline had: margin: 0 auto; min-height: 400px; display: flex; align-items: center; justify-content: center; */
+    margin: 0 auto;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .video-teaser {
+        max-width: 100%;
+    }
+
+    .slider-image-container {
+        min-height: 250px;
+        /* Reduce min-height for mobile */
+    }
+}
+
+.method-text {
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Method 3 & 4 Special Layout (Shared Image Crop) */
+.img-crop-container {
+    /* For method 3 and 4, we display a cropped view of the same wide image */
+    position: relative;
+    /* height set by JS sync */
+    overflow: hidden !important;
+}
+
+/* Left half focus */
+.img-pos-left {
+    object-position: left center;
+}
+
+/* Right half focus */
+.img-pos-right {
+    object-position: 61% center;
+}
+
+
+/* Slider Controls */
+.slider-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.2s;
+}
+
+.control-btn:hover {
+    color: var(--primary-color);
+}
+
+/* Progress Bar */
+.progress-container {
+    width: 100%;
+    max-width: 200px;
+    height: 4px;
+    background-color: var(--border-color);
+    margin: 1rem auto;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.1s linear;
+}
+
+.slider-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.nav-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: var(--bg-secondary);
+    border-color: var(--text-secondary);
+}
+
+.nav-btn.active {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+
+/* Video Slider Specifics */
+.video-slide .slide-content-wrapper {
+    /* Less padding for video slides if needed */
+}
+
+/* Scrolly text formatting */
+.sc {
+    font-variant: small-caps;
+    font-weight: 600;
+}
+
+/* Tables */
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 2rem;
+}
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.results-table th,
+.results-table td {
+    padding: 0.75rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.results-table th {
+    background-color: var(--bg-secondary);
+    font-weight: 600;
+    border-top: 1px solid var(--border-color);
+}
+
+.header-group {
+    border-bottom: 1px solid #d1d5db !important;
+}
+
+.method-col {
+    text-align: left !important;
+    font-weight: 600;
+    background-color: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+}
+
+.best-result {
+    font-weight: 700;
+    /* color: var(--primary-color); */
+}
+
+/* BibTeX */
+.bibtex-wrapper {
+    position: relative;
+    background-color: #f3f4f6;
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+
+.bibtex-container {
+    margin: 0;
+    font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    white-space: pre;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.copy-btn:hover {
+    background-color: #f9fafb;
+    border-color: var(--text-primary);
+}
+
+/* Footer */
+footer {
+    background-color: var(--bg-secondary);
+    padding: 3rem 0;
+    margin-top: 4rem;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+footer p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .title {
+        font-size: 1.75rem;
+    }
+
+    .paper-section {
+        padding: 1.5rem;
+    }
+
+    .slider-img {
+        max-height: 300px;
+        /* constrain height on mobile */
+        object-fit: contain;
+    }
+
+    /* Stack tables or scroll */
+    .results-table {
+        font-size: 0.8rem;
+    }
+
+    .slider-pagination {
+        gap: 0.25rem;
+    }
+
+    .nav-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    /* Mobile Carousel: 1 item per row */
+    .mesh-carousel-item {
+        flex: 0 0 100%;
+        min-width: 100%;
+        padding: 0 5px;
+        /* Squeeze padding slightly */
+    }
+
+    /* Stack controls on very small screens if needed, or allow wrap */
+    .mesh-controls-group {
+        flex-wrap: wrap;
+        width: 90%;
+        /* Allow it to be wider on mobile */
+        padding: 6px 10px;
+        gap: 10px;
+    }
+}
+
+/* Default Desktop Carousel Item */
+@media (min-width: 769px) {
+    .mesh-carousel-item {
+        flex: 0 0 33.333%;
+        min-width: 33.333%;
+        box-sizing: border-box;
+        padding: 0 10px;
+    }
+}
+
+/* Lightbox Modal */
+.lightbox-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 1001;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Zoom hint */
+.method-image,
+.teaser-img,
+.result-item img,
+.slider-img {
+    transition: transform 0.2s ease;
+}
+
+/* Don't show zoom cursor on mobile via media query logic in JS, but CSS can hint too */
+
+
+/* 3D Mesh Visualization Controls */
+.mesh-controls-group {
+    position: relative;
+    margin: 5px auto 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Enforce vertical centering of all options */
+    background: rgba(255, 255, 255, 0.9);
+    padding: 4px 8px;
+    /* Reduced padding */
+    border-radius: 20px;
+    gap: 8px;
+    /* Reduced gap from 15px */
+    width: fit-content;
+    max-width: 100%;
+    /* Prevent overflow */
+    flex-wrap: wrap;
+    /* Allow wrapping on small screens */
+    box-sizing: border-box;
+    /* Include padding in width */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.mesh-radio-option {
+    display: flex;
+    align-items: center;
+    /* keep centered vertically relative to the tallest item */
+    gap: 4px;
+    /* Reduced internal gap */
+    height: 100%;
+    /* Ensure it fills the container height */
+}
+
+.mesh-radio-option input[type="radio"] {
+    accent-color: var(--primary-color);
+    cursor: pointer;
+    margin-top: 0;
+    /* ensure no extra margin shifts it */
+}
+
+.mesh-radio-option label {
+    font-size: 0.75rem;
+    /* Reduced from 0.85rem */
+    /* Slightly smaller to accommodate 2 lines */
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    line-height: 1.1;
+    /* Tighter line height for the 2-line text */
+    text-align: center;
+}
+
+/* Style for active label */
+.mesh-radio-option input[type="radio"]:checked+label {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Render Wrapper */
+.render_wrapper {
+    position: relative;
+    /* height: 400px;  Set via JS, but good fallback */
+    width: 100%;
+    display: block;
+}
+
+/* Mesh Caption Style */
+/* Mesh Caption Style */
+/* Mesh Caption Style */
+.mesh-caption {
+    margin-top: 10px;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    text-align: center;
+    line-height: 1.4;
+    min-height: 2.8em;
+    padding: 0 5px;
+}
+
+.method-text {
+    /* font-family: Inherit from body (Inter/Sans-serif) to match Abstract */
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    text-align: justify;
+    line-height: 1.5;
+    max-width: 800px;
+    margin: 15px auto 0 auto;
+}
+
+/* Dark Mode Overrides (Placed at end to ensure precedence) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #60a5fa;
+        /* Lighter blue for dark mode */
+        --text-primary: #f9fafb;
+        --text-secondary: #d1d5db;
+        --bg-color: #0f172a;
+        /* Slate 900 */
+        --bg-secondary: #1e293b;
+        /* Slate 800 */
+        --border-color: #334155;
+    }
+
+    .mesh-controls-group {
+        background: rgba(30, 41, 59, 0.9) !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .mesh-radio-option label {
+        color: var(--text-secondary);
+    }
+
+    .mesh-radio-option input[type="radio"]:checked+label {
+        color: var(--primary-color);
+    }
+
+    .paper-section {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    }
+
+    .title {
+        background: linear-gradient(135deg, #38bdf8 0%, #e0f2fe 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .bibtex-wrapper {
+        background-color: rgba(30, 41, 59, 0.5);
+        border: 1px solid var(--border-color);
+    }
+
+    .bibtex-container {
+        color: #e2e8f0;
+    }
+}

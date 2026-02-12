@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://IdoSobol.github.io/realiz3d/sitemap.xml

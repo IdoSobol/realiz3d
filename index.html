@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VXT0855H8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-7VXT0855H8');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="We present Realiz3D, a diffusion model for synthesizing realistic 3D objects from text prompts. Realiz3D adapts efficient image-latent diffusion to the 3D domain by representing 3D objects in bird’s-eye-view form that encodes spatial structure together with object attributes. A lightweight recovery step reconstructs 3D objects from the generated maps. To better align generation with the visual scene, Realiz3D incorporates BEV-aligned depth, semantic, and motion cues extracted from pretrained foundation models, which guide the stochastic generation process toward physically plausible 3D objects. Conditioning on images makes the approach broadly compatible, in principle, with existing visual datasets and simulation frameworks, offering a scalable direction for multimodal generative simulation. Evaluations on large-scale driving data show that Realiz3D captures characteristic 3D object distributions and reduces the gap to perception models trained on real data, marking a step toward unified generative simulation across sensing modalities.">
+    <title>Realiz3D: 3D Generation Made Photorealistic via Domain-Aware Learning</title>
+    <link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+    <!-- Social Media Meta Tags -->
+    <meta property="og:title" content="Realiz3D: 3D Generation Made Photorealistic via Domain-Aware Learning" />
+    <meta property="og:description"
+        content="We present Realiz3D, a diffusion model for synthesizing realistic 3D objects from text prompts. Realiz3D adapts efficient image-latent diffusion to the 3D domain by representing 3D objects in bird’s-eye-view form that encodes spatial structure together with object attributes. A lightweight recovery step reconstructs 3D objects from the generated maps. To better align generation with the visual scene, Realiz3D incorporates BEV-aligned depth, semantic, and motion cues extracted from pretrained foundation models, which guide the stochastic generation process toward physically plausible 3D objects. Conditioning on images makes the approach broadly compatible, in principle, with existing visual datasets and simulation frameworks, offering a scalable direction for multimodal generative simulation. Evaluations on large-scale driving data show that Realiz3D captures characteristic 3D object distributions and reduces the gap to perception models trained on real data, marking a step toward unified generative simulation across sensing modalities." />
+    <meta property="og:url" content="https://radargen.github.io/" />
+    <meta property="og:image" content="https://radargen.github.io/static/images/teaser_figure.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="radargen.github.io">
+    <meta property="twitter:url" content="https://radargen.github.io/">
+    <meta name="twitter:title" content="Realiz3D: 3D Generation Made Photorealistic via Domain-Aware Learning" />
+    <meta name="twitter:description"
+        content="We present Realiz3D, a diffusion model for synthesizing realistic 3D objects from text prompts. Realiz3D adapts efficient image-latent diffusion to the 3D domain by representing 3D objects in bird’s-eye-view form that encodes spatial structure together with object attributes. A lightweight recovery step reconstructs 3D objects from the generated maps. To better align generation with the visual scene, Realiz3D incorporates BEV-aligned depth, semantic, and motion cues extracted from pretrained foundation models, which guide the stochastic generation process toward physically plausible 3D objects. Conditioning on images makes the approach broadly compatible, in principle, with existing visual datasets and simulation frameworks, offering a scalable direction for multimodal generative simulation. Evaluations on large-scale driving data show that Realiz3D captures characteristic 3D object distributions and reduces the gap to perception models trained on real data, marking a step toward unified generative simulation across sensing modalities." />
+    <meta name="twitter:image" content="https://radargen.github.io/static/images/teaser_im.jpg" />
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="static/css/styles.css?v=4">
+
+    <!-- Scripts -->
+    <script src="static/js/main.js?v=2" defer></script>
+    <!-- Model Viewer -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="title">Realiz3D: 3D Generation Made Photorealistic via Domain-Aware Learning</h1>
+
+            <!-- <div class="publication-venue">
+                <span>Conference 202X</span>
+            </div> -->
+
+            <div class="authors">
+                <span class="author-block"><a href="mailto:ido.sobol@campus.technion.ac.il">Ido
+                        Sobol</a><sup>1,2</sup>,</span>
+                <span class="author-block"><a href="https://sites.google.com/site/kihyuksml/">Kihyuk
+                        Sohn</a><sup>2</sup>,</span>
+                <span class="author-block"><a href="https://www.linkedin.com/in/yoavblum">Yoav
+                        Blum</a><sup>2</sup>,</span>
+                <span class="author-block"><a href="https://egorzakharov.github.io/">Egor
+                        Zakharov</a><sup>2</sup>,</span>
+                <span class="author-block"><a href="https://il.linkedin.com/in/maxbluestone">Max
+                        Bluvstein</a><sup>2</sup>,</span>
+                <span class="author-block"><a href="https://www.robots.ox.ac.uk/~vedaldi/">Andrea
+                        Vedaldi</a><sup>2</sup>,</span>
+                <span class="author-block"><a href="https://orlitany.github.io/">Or Litany</a><sup>1</sup></span>
+
+            </div>
+
+            <div class="affiliations">
+                <span class="author-block"><sup>1</sup>Technion</span>
+                <span class="author-block"><sup>2</sup>Meta AI</span>
+            </div>
+
+            <div class="publication-links">
+                <a class="link-btn">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv</span>
+                </a>
+                <!-- <a href="#" class="link-btn">
+                    <span class="icon"><i class="fab fa-youtube"></i></span>
+                    <span>Video</span>
+                </a> -->
+                <a class="link-btn">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code (Coming soon)</span>
+                </a>
+                <a href="#BibTeX" class="link-btn">
+                    <span class="icon"><i class="fas fa-book"></i></span>
+                    <span>BibTeX</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teaser Section -->
+    <section class="container" style="margin-top: 2rem;">
+        <div class="paper-section">
+            <div class="teaser-container">
+                <img src="static/videos/teaser_gif.gif" alt="Teaser" class="teaser-img" width="100%">
+            </div>
+            <div class="text-center" style="margin-top: 24px;">
+                <p
+                    style="font-size: 1.25rem; font-weight: 600; margin-bottom: 12px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                    TL;DR: <span class="sc">Realiz3D</span> is a framework to train controllable and realistic
+                    diffusion models using synthetic annotated data and real unlabeled data.
+                </p>
+                <p style="color: var(--text-secondary); max-width: 900px; margin: 0 auto; text-align: left;">
+                    <span class="sc">Realiz3D</span> is a framework that leverages both real and synthetic data to train
+                    diffusion models that generate photorealistic images while faithfully adhering to input conditions
+                    and maintaining 3D consistency. Compared to standard fine-tuning on mixed real and synthetic data,
+                    <span class="sc">Realiz3D</span> produces noticeably more realistic results while preserving
+                    geometric fidelity across views.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Abstract Section -->
+    <section class="container">
+        <div class="paper-section">
+            <div class="section-title">Abstract</div>
+            <div class="abstract-content">
+                <p>
+                    We often aim to generate images that are both photorealistic and 3D-consistent, adhering to precise
+                    geometry, material, and viewpoint controls. Typically, this is achieved by fine-tuning an image
+                    generator, pre-trained on billions of real images, using renders of synthetic 3D assets, where
+                    annotations for control signals are available. While this approach can learn the desired controls,
+                    it often compromises the realism of the images due to domain gap between photographs and renders. We
+                    observe that this issue largely arises from the model learning an unintended association between the
+                    presence of control signals and the synthetic appearance of the images. To address this, we
+                    introduce <span class="sc">Realiz3D</span>, a lightweight framework that decouples controls and
+                    visual domain. The key idea
+                    is to explicitly learn visual domain, real or synthetic, separately from other control signals by
+                    introducing a co-variate that, fed into small residual adapters, shifts the domain. Then, the
+                    generator can be trained to gain controllability, without fitting to specific visual domain. In this
+                    way, the model can be guided to produce realistic images even when controls are applied. We enhance
+                    control transferability to the real domain by leveraging insights about roles of different layers
+                    and denoising steps in diffusion-based generators, informing new training and inference strategies
+                    that further mitigate the gap. We demonstrate the advantages of <span class="sc">Realiz3D</span> in
+                    tasks as
+                    text-to-multiview generation and texturing from 3D inputs, producing outputs that are 3D-consistent
+                    and photorealistic.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Method Section -->
+    <section class="container">
+        <div class="paper-section">
+            <div class="section-title">Method</div>
+
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div class="slider-image-container">
+                    <canvas id="method-pdf-canvas" style="width: 100%; height: auto; display: block;"></canvas>
+                </div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+                <script>
+                    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+                </script>
+                <div class="method-text">
+                    <p>
+                        <span class="sc">Realiz3D</span> introduces <strong>Domain Shifters</strong>, lightweight
+                        residual
+                        adapters
+                        that learn visual domain identity (real vs. synthetic) independently of control signals,
+                        enabling
+                        the model to learn controllability without compromising realism.<br>
+                        <strong>(Top left)</strong> A Domain Shifter encodes domain identity as a
+                        low-rank
+                        residual added to latent features.<br>
+                        <strong>(Top right)</strong> <em>Stage&nbsp;1</em>: Domain Shifters are trained with
+                        real and synthetic data, learning domain separation.<br>
+                        <strong>(Bottom)</strong> <em>Stage&nbsp;2</em>: The diffusion model is fine-tuned for
+                        controllable
+                        generation using both domains.<br>
+                        <em>(Bottom left)</em> Synthetic samples teach controllability under the synthetic
+                        mode.
+                        <em>(Bottom right)</em> Real samples are used for <em>Representation
+                            Binding</em>, combining (1) <em>Layer-Aware Training</em>, freezing early layers
+                        while updating later ones, and (2) <em>Domain
+                            Reassignment</em>, occasionally reusing the synthetic mode in early layers to transfer
+                        control to the real domain.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <!-- 3D Mesh Visualization Section -->
+    <section class="container">
+        <div class="paper-section">
+            <div class="section-title">Text-to-3D Results</div>
+
+            <div class="slider-container" id="mesh-slider">
+                <div class="slides-wrapper">
+                    <!-- Slides will be injected here via JS -->
+                </div>
+
+                <!-- Controls -->
+                <div class="slider-controls">
+                    <button class="control-btn btn-prev"><i class="fas fa-chevron-left"></i></button>
+                    <!-- <button class="control-btn btn-pause"><i class="fas fa-pause"></i></button> -->
+                    <button class="control-btn btn-next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+
+                <!-- Progress Bar -->
+                <!-- <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div> -->
+
+                <div class="slider-pagination" id="mesh-slider-pagination">
+                    <!-- Pagination buttons will be injected here -->
+                </div>
+            </div>
+            <div class="method-text">
+                <p>
+                    We perform text-to-3D generation by performing multiview texturing and backprojecting the textures
+                    onto their
+                    corresponding
+                    original meshes. Occluded regions are naïvely filled and may appear blurry.<br>
+                    For comparison, we also present the results of <em>standard fine-tuning</em>: directly fine-tuning
+                    the same
+                    base
+                    model using the same
+                    mix of real and synthetic data. See additional baselines in the paper.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Result Section -->
+    <section class="container">
+        <div class="paper-section">
+            <div class="section-title">Text-to-Multiview Results</div>
+            <div class="video-teaser">
+                <video class="teaser-video" controls playsinline>
+                    <source src="static/videos/t2mv.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <!-- <div class="method-text">
+                <p>
+                    <strong>Caption:</strong> Placeholder text for Text-to-Multiview results. Describe the consistency
+                    and
+                    realism of multiview generation.
+                </p>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Qualitative Comparison Section -->
+    <section class="container">
+        <div class="paper-section">
+            <div class="section-title">Multiview Texturing Results</div>
+            <div class="video-teaser">
+                <video class="teaser-video" controls playsinline>
+                    <source src="static/videos/texturing.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <!-- <div class="method-text">
+                <p>
+                    <strong>Caption:</strong> Placeholder text for Multiview Texturing results. Describe the texture
+                    quality
+                    and alignment with geometry.
+                </p>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- BibTeX Section -->
+    <section class="container" id="BibTeX">
+        <div class="paper-section">
+            <div class="section-title">BibTeX</div>
+            <div class="bibtex-wrapper">
+                <button class="copy-btn" id="copyBibtexBtn">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+                <pre class="bibtex-container" id="bibtexCode"><code>TBA</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div style="display: inline-block; text-align: left; max-width: 710px;">
+                <p style="margin-bottom: 10px;">
+                    The website template is adapted from <a href="https://radargen.github.io/">RadarGen</a> and inspired
+                    by <a href="https://huanngzh.github.io/MV-Adapter-Page/">MV-Adapter</a>.
+                </p>
+                <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 0;">
+                    Note: Remove all tracking and analytics identifiers from the code prior to deployment.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
